@@ -6,5 +6,5 @@ export type Product = {
   name: string;
   price: number;
   userProducts: UserProduct[];
-  inventory: Inventory;
+  inventory?: Inventory;
 };

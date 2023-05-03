@@ -4,6 +4,6 @@ export type Address = {
   id: number;
   street: string;
   city: string;
-  userId: number;
-  user: User;
+  userId?: number;
+  user?: User;
 };
