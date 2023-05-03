@@ -33,6 +33,14 @@ model Product {
   name         String
   price        Float
   userProducts UserProduct[]
+  inventory    Inventory?
+}
+
+model Inventory {
+  id        Int     @id @default(autoincrement())
+  stock     Int
+  productId Int     @unique
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model UserProduct {
