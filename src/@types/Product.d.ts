@@ -1,3 +1,5 @@
+import { Inventory } from "./Inventory";
+
 export type Product = {
   id: number;
   name: string;
