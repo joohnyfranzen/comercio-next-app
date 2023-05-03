@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String   @unique
-  password    String
-  phoneNumber String
-  address     Address?
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  password     String
+  phoneNumber  String
+  address      Address?
+  userProducts UserProduct[]
 }
 
 model Address {
@@ -25,4 +26,19 @@ model Address {
   city   String
   userId Int?   @unique
   user   User?  @relation(fields: [userId], references: [id])
+}
+
+model Product {
+  id           Int           @id @default(autoincrement())
+  name         String
+  price        Float
+  userProducts UserProduct[]
+}
+
+model UserProduct {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  productId Int
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
