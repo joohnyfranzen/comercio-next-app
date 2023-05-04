@@ -6,8 +6,11 @@ class Product extends Handler {
   async put(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
     const updateBody = req.body;
+    const id = req.query.id;
+
     try {
-      const product = await prisma.product.create({
+      const product = await prisma.product.update({
+        where: { id: Number(id) },
         data: updateBody,
       });
       return res.status(200).json({ product });
