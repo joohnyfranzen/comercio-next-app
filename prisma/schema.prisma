@@ -32,6 +32,8 @@ model Product {
   id           Int           @id @default(autoincrement())
   name         String
   price        Float
+  state        String
+  deleted      Boolean       @default(false)
   userProducts UserProduct[]
   inventory    Inventory?
 }
@@ -47,6 +49,7 @@ model UserProduct {
   id        Int     @id @default(autoincrement())
   userId    Int
   productId Int
+  deleted   Boolean @default(false)
   user      User    @relation(fields: [userId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
 }
