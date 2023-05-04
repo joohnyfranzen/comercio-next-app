@@ -1,3 +1,4 @@
+import { Image } from "./Image";
 import { Inventory } from "./Inventory";
 import { UserProduct } from "./UserProduct";
 
@@ -8,4 +9,5 @@ export type Product = {
   state: string;
   userProducts: UserProduct[];
   inventory?: Inventory;
+  images?: Image[];
 };
