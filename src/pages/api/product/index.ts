@@ -6,16 +6,18 @@ class Product extends Handler {
   async post(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
     const { name, price, state } = req.body;
+
     try {
       const product = await prisma.product.create({
         data: {
           name,
-          price,
+          price: Number(price),
           state,
         },
       });
       return res.status(200).json({ product });
     } catch (err) {
+      console.log(err);
       return res.status(400).json({ message: err });
     }
   }
