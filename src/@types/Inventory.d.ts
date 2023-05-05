@@ -1,5 +1,5 @@
 export type Inventory = {
-  id: number;
+  id: string;
   stock: number;
-  productId: number;
+  productId: string;
 };
