@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 class Product extends Handler {
   async post(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
+    console.log(req.body);
     const { name, price, state } = req.body;
 
     try {
@@ -24,8 +25,10 @@ class Product extends Handler {
   async get(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
     try {
-      const product = await prisma.product.findMany();
-      return res.status(200).json({ product });
+      const product = await prisma.product.findMany({
+        where: { deleted: false },
+      });
+      return res.status(200).json(product);
     } catch (err) {
       return res.status(400).json({ message: err });
     }
