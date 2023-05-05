@@ -8,7 +8,7 @@ class UserProduct extends Handler {
     const prisma = new PrismaClient();
     try {
       const userProduct = await prisma.userProduct.delete({
-        where: { id: Number(id) },
+        where: { id: String(id) },
       });
       return res.status(200).json({ userProduct });
     } catch (err) {
