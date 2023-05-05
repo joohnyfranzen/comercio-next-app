@@ -10,7 +10,7 @@ class User extends Handler {
 
     try {
       const user = await prisma.user.update({
-        where: { id: Number(id) },
+        where: { id: String(id) },
         data: updateBody,
       });
       return res.status(200).json({ user });
@@ -23,7 +23,7 @@ class User extends Handler {
     const id = req.query.id;
     try {
       const user = await prisma.user.findFirst({
-        where: { id: Number(id) },
+        where: { id: String(id) },
       });
       return res.status(200).json({ user });
     } catch (err) {
@@ -35,7 +35,7 @@ class User extends Handler {
     const id = req.query.id;
     try {
       const user = await prisma.user.delete({
-        where: { id: Number(id) },
+        where: { id: String(id) },
       });
       return res.status(200).json({ user });
     } catch (err) {
