@@ -3,7 +3,7 @@ import { Inventory } from "./Inventory";
 import { UserProduct } from "./UserProduct";
 
 export type Product = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   state: string;
