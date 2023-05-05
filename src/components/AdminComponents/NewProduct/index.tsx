@@ -1,33 +1,70 @@
 import { Button, Select } from "@chakra-ui/react";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
+
+interface FormValues {
+  name: string;
+  price: string;
+  state: string;
+}
+
 export default function NewProduct() {
-  const name = useRef<HTMLInputElement>(null);
-  const price = useRef<HTMLInputElement>(null);
-  const state = useRef<HTMLSelectElement>(null);
-  const formData = {
-    name: name.current?.value,
-    price: price.current?.value,
-    state: state.current?.value,
+  const [formData, setFormData] = useState<FormValues>({
+    name: "",
+    price: "",
+    state: "",
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
-  const submitForm = () => {
-    axios.post("/api/product", formData).then((res) => {
-      console.log(res.data);
-    });
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      state: event.target.value,
+    }));
   };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    axios.post("/api/product", formData);
+  };
+
   return (
     <div>
-      <form>
-        <input type="text" ref={name} placeholder="Nome do Produto" />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Nome do Produto"
+          value={formData.name}
+          onChange={handleInputChange}
+        />
         <br />
-        <input type="number" ref={price} placeholder="Valor" />
+        <input
+          type="number"
+          name="price"
+          placeholder="Valor"
+          value={formData.price}
+          onChange={handleInputChange}
+        />
         <br />
         <p>Estado</p>
-        <Select ref={state} placeholder="Selecione o estado">
+        <Select
+          name="state"
+          value={formData.state}
+          onChange={handleSelectChange}
+          placeholder="Selecione o estado"
+        >
           <option value={"usado"}>Usado</option>
           <option value={"novo"}>Novo</option>
         </Select>
-        <Button onClick={submitForm}>Criar Produto</Button>
+        <Button type="submit">Criar Produto</Button>
       </form>
     </div>
   );
