@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteProduct from "../DelProduct";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -40,10 +41,12 @@ export default function Products() {
                 ></Image>
               </>
             )}
+            <Link href={`/admin/editarproduto/${product.id}`}>Editar</Link>
+            <DeleteProduct id={product.id} />
           </>
         );
       })}
-      <Link href="/admin/novoproduto">Novo Produto</Link>
+      <Link href="/admin/novoproduto">Novo</Link>
     </div>
   );
 }
