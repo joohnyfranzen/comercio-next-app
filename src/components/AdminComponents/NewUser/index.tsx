@@ -1,8 +1,9 @@
 import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
-
+import { useRouter } from "next/router";
 export default function NewUser() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +28,8 @@ export default function NewUser() {
       .post("/api/user", formData)
       .then((response) => {
         console.log(response.data);
+
+        router.push("/admin/usuarios");
       })
       .catch((error) => {
         console.log(error.response.data);
