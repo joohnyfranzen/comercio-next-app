@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { NewSell } from "@/@types/NewSell";
 import { User } from "@/@types/User";
+import { useRouter } from "next/router";
 
 export default function NewSell() {
+  const router = useRouter();
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -57,6 +59,8 @@ export default function NewSell() {
     };
     axios.post("/api/userproduct", formData).then((res) => {
       console.log(res.data);
+
+      router.push("/admin/vendas");
     });
   };
   const addProduct = () => {
