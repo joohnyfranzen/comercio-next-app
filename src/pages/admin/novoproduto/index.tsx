@@ -1,11 +1,11 @@
+import Layout from "@/components/AdminComponents/Layout";
 import NewProduct from "@/components/AdminComponents/NewProduct";
 import React from "react";
 
 export default function NovoProduto() {
   return (
-    <div>
-      NovoProduto
+    <Layout>
       <NewProduct />
-    </div>
+    </Layout>
   );
 }
