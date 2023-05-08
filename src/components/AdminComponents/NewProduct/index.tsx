@@ -1,5 +1,6 @@
 import { Button, Select } from "@chakra-ui/react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 interface FormValues {
@@ -9,6 +10,8 @@ interface FormValues {
 }
 
 export default function NewProduct() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState<FormValues>({
     name: "",
     price: "",
@@ -32,7 +35,9 @@ export default function NewProduct() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post("/api/product", formData);
+    axios.post("/api/product", formData).then((res) => {
+      router.push("/admin/produtos");
+    });
   };
 
   return (
