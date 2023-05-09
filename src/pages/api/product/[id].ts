@@ -5,17 +5,18 @@ import { NextApiRequest, NextApiResponse } from "next";
 class Product extends Handler {
   async put(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
-    const updateBody = req.body;
     const id = req.query.id;
-
+    let updateBody = req.body;
+    delete updateBody.id;
+    updateBody.price = Number(updateBody.price);
     try {
       const product = await prisma.product.update({
-        where: { id: Number(id) },
+        where: { id: String(id) },
         data: updateBody,
       });
       return res.status(200).json({ product });
-    } catch (err) {
-      return res.status(400).json({ message: err });
+    } catch (error) {
+      return res.status(400).json({ message: error });
     }
   }
   async get(req: NextApiRequest, res: NextApiResponse) {
@@ -23,9 +24,10 @@ class Product extends Handler {
     const id = req.query.id;
     try {
       const product = await prisma.product.findFirst({
-        where: { id: Number(id) },
+        where: { id: String(id) },
+        include: { inventory: true },
       });
-      return res.status(200).json({ product });
+      return res.status(200).json(product);
     } catch (err) {
       return res.status(400).json({ message: err });
     }
@@ -35,7 +37,8 @@ class Product extends Handler {
     const id = req.query.id;
     try {
       const product = await prisma.product.delete({
-        where: { id: Number(id) },
+        where: { id: String(id) },
+        include: { inventory: true },
       });
       return res.status(200).json({ product });
     } catch (err) {
