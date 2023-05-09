@@ -5,7 +5,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 class Product extends Handler {
   async post(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
-    console.log(req.body);
     const { name, price, state } = req.body;
 
     try {
@@ -18,7 +17,6 @@ class Product extends Handler {
       });
       return res.status(200).json({ product });
     } catch (err) {
-      console.log(err);
       return res.status(400).json({ message: err });
     }
   }
@@ -27,6 +25,7 @@ class Product extends Handler {
     try {
       const product = await prisma.product.findMany({
         where: { deleted: false },
+        include: { inventory: true },
       });
       return res.status(200).json(product);
     } catch (err) {
