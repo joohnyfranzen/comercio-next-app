@@ -1,4 +1,5 @@
 import { User } from "@/@types/User";
+import DeleteOrder from "@/components/AdminComponents/DelOrder";
 import Layout from "@/components/AdminComponents/Layout";
 import axios from "axios";
 import Link from "next/link";
@@ -28,6 +29,7 @@ export default function Vendas() {
                 <>
                   <h2>Produto: {product.product.name}</h2>
                   <h2>Valor: R${product.product.price},00</h2>
+                  <DeleteOrder id={product.id} />
                 </>
               );
             })}
