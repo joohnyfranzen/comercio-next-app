@@ -9,8 +9,8 @@ class Inventory extends Handler {
     const prisma = new PrismaClient();
     try {
       const inventory = await prisma.inventory.update({
-        where: { id: Number(id) },
-        data: { stock: stock },
+        where: { id: String(id) },
+        data: { stock: Number(stock) },
       });
       return res.status(200).json({ inventory });
     } catch (err) {
@@ -22,7 +22,7 @@ class Inventory extends Handler {
     const prisma = new PrismaClient();
     try {
       const inventory = await prisma.inventory.delete({
-        where: { id: Number(id) },
+        where: { id: String(id) },
       });
       return res.status(200).json({ inventory });
     } catch (err) {
@@ -30,3 +30,4 @@ class Inventory extends Handler {
     }
   }
 }
+export default new Inventory().handler;
