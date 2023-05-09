@@ -101,19 +101,25 @@ class UserProduct extends Handler {
 
       return res.status(200).json({ userProduct });
     } catch (err) {
-      console.log(err);
-
       return res.status(400).json({ message: err });
     }
   }
   async get(req: NextApiRequest, res: NextApiResponse) {
-    const { userId } = req.body;
     const prisma = new PrismaClient();
     try {
-      const userProduct = await prisma.userProduct.findMany({
-        where: { userId: userId },
+      const userProduct = await prisma.user.findMany({
+        include: {
+          userProducts: {
+            include: {
+              product: true,
+            },
+            where: {
+              deleted: false,
+            },
+          },
+        },
       });
-      return res.status(200).json({ userProduct });
+      return res.status(200).json(userProduct);
     } catch (err) {
       return res.status(400).json({ message: err });
     }
