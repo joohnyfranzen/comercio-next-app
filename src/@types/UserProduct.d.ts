@@ -2,7 +2,7 @@ import { Product } from "./Product";
 import { User } from "./User";
 
 export type UserProduct = {
-  id: number;
+  id: string;
   userId: number;
   productId: number;
   user: User;
