@@ -1,5 +1,6 @@
 import { User } from "@/@types/User";
 import Layout from "@/components/AdminComponents/Layout";
+import ReactPrint from "@/components/AdminComponents/ReactPrint";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -38,6 +39,7 @@ export default function Venda() {
           )
         );
       })}
+      <ReactPrint />
     </Layout>
   );
 }
