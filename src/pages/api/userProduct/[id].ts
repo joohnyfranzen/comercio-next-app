@@ -4,11 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 class UserProduct extends Handler {
   async get(req: NextApiRequest, res: NextApiResponse) {
-    const { userId } = req.query;
+    const { id } = req.query;
     const prisma = new PrismaClient();
 
     const userProduct = await prisma.user.findFirst({
-      where: { id: userId as string },
+      where: { id: String(id) },
       include: {
         address: true,
         userProducts: {
