@@ -24,15 +24,15 @@ export default function NewSell() {
   const [selectedUser, setSelectedUser] = useState<User>();
 
   useEffect(() => {
+    const getData = () => {
+      axios.get("/api/product").then((response) => setProducts(response.data));
+    };
+    const getUsers = () => {
+      axios.get("/api/user").then((response) => setUsers(response.data));
+    };
     getData();
     getUsers();
   }, []);
-  const getData = () => {
-    axios.get("/api/product").then((response) => setProducts(response.data));
-  };
-  const getUsers = () => {
-    axios.get("/api/user").then((response) => setUsers(response.data));
-  };
   const submitForm = () => {
     const selectedProducts = productCount.map((count) => {
       const selectElement = document.getElementById(
