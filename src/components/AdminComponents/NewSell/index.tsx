@@ -130,7 +130,7 @@ export default function NewSell() {
               name="phoneNumber"
               value={newUser.phoneNumber}
               onChange={handleInputChange}
-              placeholder="Nome da Rua"
+              placeholder="Numero de Telefone"
             />
             <br />
             <input
@@ -138,7 +138,7 @@ export default function NewSell() {
               name="street"
               value={newUser.street}
               onChange={handleInputChange}
-              placeholder="Cidade"
+              placeholder="Localização  do Comprador"
             />
             <br />
             <input
