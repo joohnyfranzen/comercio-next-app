@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/AdminComponents/ReactPrint/index.jsx"
+    "src/components/AdminComponents/ReactPrint/index.jsx",
+    "src/pages/admin/orcamento/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
