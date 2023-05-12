@@ -1,5 +1,6 @@
 import { Product } from "@/@types/Product";
 import Layout from "@/components/AdminComponents/Layout";
+import { Button, Input, Select } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -62,31 +63,46 @@ export default function EditarProduto() {
 
   return (
     <Layout>
-      <h1>Editar Produto</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" defaultValue={product?.name} ref={nameRef} />
-        <input type="number" defaultValue={product?.price} ref={priceRef} />
-        <select name="state" id="state" ref={stateRef}>
-          <option value="novo">Novo</option>
-          <option value="usado">Usado</option>
-        </select>
-        {product?.inventory == null ? (
-          <>
-            Estoque
-            <input type="number" ref={stockRef} />
-          </>
-        ) : (
-          <>
-            Estoque
-            <input
-              type="number"
-              ref={stockRef}
-              defaultValue={product?.inventory?.stock}
-            />
-          </>
-        )}
-        <button type="submit">Enviar</button>
-      </form>
+      <div className="w-full flex justify-center mt-10">
+        <form className="w-96 text-center" onSubmit={handleSubmit}>
+          <h1 className="text-2xl my-5">Editar Produto</h1>
+          <Input
+            type="text"
+            className="my-5"
+            defaultValue={product?.name}
+            ref={nameRef}
+          />
+          <Input
+            type="number"
+            className="mb-5"
+            defaultValue={product?.price}
+            ref={priceRef}
+          />
+          <Select className="mb-5" name="state" id="state" ref={stateRef}>
+            <option value="novo">Novo</option>
+            <option value="usado">Usado</option>
+          </Select>
+          {product?.inventory == null ? (
+            <div className="w-full">
+              <h2>Criar Estoque</h2>
+              <Input className="w-full" type="number" ref={stockRef} />
+            </div>
+          ) : (
+            <div className="w-full">
+              <h2>Estoque</h2>
+              <Input
+                className="w-full"
+                type="number"
+                ref={stockRef}
+                defaultValue={product?.inventory?.stock}
+              />
+            </div>
+          )}
+          <Button className="mt-5" colorScheme="green" type="submit">
+            Editar
+          </Button>
+        </form>
+      </div>
     </Layout>
   );
 }
