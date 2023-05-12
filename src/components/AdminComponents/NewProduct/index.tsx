@@ -41,35 +41,41 @@ export default function NewProduct() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome do Produto"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-        <br />
-        <input
-          type="number"
-          name="price"
-          placeholder="Valor"
-          value={formData.price}
-          onChange={handleInputChange}
-        />
-        <br />
-        <p>Estado</p>
-        <Select
-          name="state"
-          value={formData.state}
-          onChange={handleSelectChange}
-          placeholder="Selecione o estado"
-        >
-          <option value={"usado"}>Usado</option>
-          <option value={"novo"}>Novo</option>
-        </Select>
-        <Button type="submit">Criar Produto</Button>
+    <div className="flex justify-center mt-20">
+      <form className="w-96 center" onSubmit={handleSubmit}>
+        <h1 className="text-2xl text-center">Adicionar Novo Produto</h1>
+        <div>
+          <input
+            className=" w-full p-2  my-5 border-2 border-gray-200"
+            type="text"
+            name="name"
+            placeholder="Nome do Produto"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          <br />
+          <input
+            className=" w-full p-2  my-5 border-2 border-gray-200"
+            type="number"
+            name="price"
+            placeholder="Valor"
+            value={formData.price}
+            onChange={handleInputChange}
+          />
+          <br />
+          <p>Estado</p>
+          <Select
+            className="mb-5"
+            name="state"
+            value={formData.state}
+            onChange={handleSelectChange}
+            placeholder="Selecione o estado"
+          >
+            <option value={"usado"}>Usado</option>
+            <option value={"novo"}>Novo</option>
+          </Select>
+          <Button type="submit">Criar Produto</Button>
+        </div>
       </form>
     </div>
   );
