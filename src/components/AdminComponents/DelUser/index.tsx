@@ -1,4 +1,5 @@
 import { User } from "@/@types/User";
+import { Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React from "react";
@@ -11,5 +12,14 @@ export default function DeleteUser({ id }: { id: User["id"] }) {
       router.reload();
     });
   };
-  return <button onClick={handleDelete}>Deletar</button>;
+  return (
+    <Button
+      variant="solid"
+      color="black"
+      bgColor="red.200"
+      onClick={handleDelete}
+    >
+      Deletar
+    </Button>
+  );
 }
