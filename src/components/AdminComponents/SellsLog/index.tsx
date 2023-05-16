@@ -140,7 +140,7 @@ export default function SellsLog() {
       });
     };
     getLastThreetoSixMonths();
-  }, []);
+  }, [thisMonth.totalQuantity, thisMonth.totalPrice]);
 
   const labels = [
     "Essa Semana",
