@@ -11,6 +11,7 @@ export default function Orçamento() {
   const [selectedProducts, setSelectedProducts] = useState([]);
   var timestamp = Date.now() / 1000;
   let total = 0;
+  let subtotal = 0;
 
   var datetime = new Date(timestamp * 1000);
   useEffect(() => {
