@@ -35,5 +35,18 @@ class UserProduct extends Handler {
       return res.status(400).json({ message: err });
     }
   }
+  async put(req: NextApiRequest, res: NextApiResponse) {
+    const { id } = req.query;
+    const prisma = new PrismaClient();
+    try {
+      const userProduct = await prisma.userProduct.update({
+        where: { id: String(id) },
+        data: { deleted: true },
+      });
+      return res.status(200).json({ userProduct });
+    } catch (err) {
+      return res.status(400).json({ message: err });
+    }
+  }
 }
 export default new UserProduct().handler;
