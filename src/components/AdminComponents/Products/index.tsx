@@ -8,6 +8,9 @@ import { Button } from "@chakra-ui/react";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
+  var total = 0;
+  var totalUsado = 0;
+  var totalNovo = 0;
   useEffect(() => {
     submitForm();
   }, []);
@@ -36,6 +39,21 @@ export default function Products() {
           </thead>
           <tbody>
             {products?.map((product) => {
+              var price = 0;
+              if (product.inventory == null) {
+                price = product.price;
+              } else {
+                price = product.price * product.inventory.stock;
+              }
+              if (product.state == "novo") {
+                totalNovo += price;
+              }
+              if (product.state == "usado") {
+                totalUsado += price;
+              }
+
+              total += price;
+
               return (
                 <tr key={product.id}>
                   <td className="px-5 py-3 border">{product.name}</td>
@@ -80,6 +98,20 @@ export default function Products() {
       <Link className="flex m-5" href="/admin/novoproduto">
         <Button>Novo Produto</Button>
       </Link>
+      <ul>
+        <li>
+          Usado=
+          {totalUsado},00
+        </li>
+        <li>
+          Novo=
+          {totalNovo},00
+        </li>
+        <li>
+          Valor Total de Moveis:
+          {total},00
+        </li>
+      </ul>
     </div>
   );
 }
