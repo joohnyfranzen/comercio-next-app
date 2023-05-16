@@ -1,4 +1,4 @@
-import { Button, Select } from "@chakra-ui/react";
+import { Button, Input, Select } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -45,8 +45,8 @@ export default function NewProduct() {
       <form className="w-96 center" onSubmit={handleSubmit}>
         <h1 className="text-2xl text-center">Adicionar Novo Produto</h1>
         <div>
-          <input
-            className=" w-full p-2  my-5 border-2 border-gray-200"
+          <Input
+            className=" w-full p-2  mt-3 border-2 border-gray-200"
             type="text"
             name="name"
             placeholder="Nome do Produto"
@@ -54,8 +54,8 @@ export default function NewProduct() {
             onChange={handleInputChange}
           />
           <br />
-          <input
-            className=" w-full p-2  my-5 border-2 border-gray-200"
+          <Input
+            className=" w-full p-2  mt-3 border-2 border-gray-200"
             type="number"
             name="price"
             placeholder="Valor"
@@ -65,7 +65,7 @@ export default function NewProduct() {
           <br />
           <p>Estado</p>
           <Select
-            className="mb-5"
+            className="mb-3"
             name="state"
             value={formData.state}
             onChange={handleSelectChange}
@@ -74,7 +74,13 @@ export default function NewProduct() {
             <option value={"usado"}>Usado</option>
             <option value={"novo"}>Novo</option>
           </Select>
-          <Button type="submit">Criar Produto</Button>
+          <Button
+            colorScheme="facebook"
+            className=" w-full p-2  border-2 border-gray-200"
+            type="submit"
+          >
+            Criar Produto
+          </Button>
         </div>
       </form>
     </div>
