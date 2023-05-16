@@ -1,5 +1,5 @@
 import { Product } from "@/@types/Product";
-import { Button, Select } from "@chakra-ui/react";
+import { Button, Input, Select } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { NewSell } from "@/@types/NewSell";
@@ -71,10 +71,15 @@ export default function NewSell() {
     setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
   return (
-    <div>
-      <form>
+    <div className="flex justify-center my-5">
+      <form className="w-96 center">
+        <h1 className="text-2xl text-center">Nova Venda</h1>
         {productCount.map((count) => (
-          <Select key={count} id={`select-${count}`}>
+          <Select
+            className=" w-full p-2  mt-3 border-2 border-gray-200"
+            key={count}
+            id={`select-${count}`}
+          >
             {products.map((product) => {
               return (
                 <option value={String(product.id)} key={String(product.id)}>
@@ -85,7 +90,7 @@ export default function NewSell() {
           </Select>
         ))}
         {isNewUser == false ? (
-          <Select>
+          <Select className=" w-full p-2  my-3 border-2 border-gray-200">
             {users.map((user) => {
               return (
                 <option
@@ -102,60 +107,74 @@ export default function NewSell() {
           </Select>
         ) : (
           <>
-            <input
+            <Input
+              className=" w-full p-2  my-3 border-2 border-gray-200"
               type="text"
               placeholder="Nome do Comprador"
               name="name"
               value={newUser.name}
               onChange={handleInputChange}
             />
-            <br />
-            <input
+            <Input
+              className=" w-full p-2  my-3 border-2 border-gray-200"
               type="text"
               name="email"
               value={newUser.email}
               onChange={handleInputChange}
               placeholder="Email do Comprador"
             />
-            <br />
-            <input
+            <Input
+              className=" w-full p-2  my-3 border-2 border-gray-200"
               name="password"
               value={newUser.password}
               onChange={handleInputChange}
               placeholder="Senha do Comprador"
             />
-            <br />
-            <input
+            <Input
+              className=" w-full p-2  my-3 border-2 border-gray-200"
               type="text"
               name="phoneNumber"
               value={newUser.phoneNumber}
               onChange={handleInputChange}
               placeholder="Numero de Telefone"
             />
-            <br />
-            <input
+            <Input
+              className=" w-full p-2  my-3 border-2 border-gray-200"
               type="text"
               name="street"
               value={newUser.street}
               onChange={handleInputChange}
               placeholder="Localização  do Comprador"
             />
-            <br />
-            <input
+            <Input
+              className=" w-full p-2  my-3 border-2 border-gray-200"
               type="text"
               name="city"
               value={newUser.city}
               onChange={handleInputChange}
               defaultValue={"Jaraguá do Sul"}
             />
-            <br />
           </>
         )}
-        <Button onClick={() => setIsNewUser(!isNewUser)}>
-          {!isNewUser ? "Novo Usuário" : "Selecionar Usuário"}
+        <div className="w-full flex justify-between">
+          <Button
+            colorScheme="green"
+            variant="outline"
+            onClick={() => setIsNewUser(!isNewUser)}
+          >
+            {!isNewUser ? "Novo Usuário" : "Selecionar Usuário"}
+          </Button>
+          <Button colorScheme="green" variant="outline" onClick={addProduct}>
+            Adicionar Produto
+          </Button>
+        </div>{" "}
+        <Button
+          onClick={submitForm}
+          colorScheme="facebook"
+          className=" w-full p-2  my-3 border-2 border-gray-200"
+        >
+          Finalizar Venda
         </Button>
-        <Button onClick={addProduct}>Adicionar Produto</Button>
-        <Button onClick={submitForm}>Finalizar Venda</Button>
       </form>
     </div>
   );
