@@ -9,7 +9,7 @@ class Address extends Handler {
     const update = req.body;
     try {
       const address = await prisma.address.update({
-        where: { id: Number(id) },
+        where: { id: String(id) },
         data: update,
       });
       return res.status(200).json({ address });
@@ -22,7 +22,7 @@ class Address extends Handler {
     const { id } = req.query;
     try {
       const address = await prisma.address.findUnique({
-        where: { id: Number(id) },
+        where: { id: String(id) },
       });
       return res.status(200).json({ address });
     } catch (err) {
@@ -34,7 +34,7 @@ class Address extends Handler {
     const { id } = req.query;
     try {
       const address = await prisma.address.delete({
-        where: { id: Number(id) },
+        where: { id: String(id) },
       });
       return res.status(200).json({ address });
     } catch (err) {

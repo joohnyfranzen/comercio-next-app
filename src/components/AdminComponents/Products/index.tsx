@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DeleteProduct from "../DelProduct";
 import { Button } from "@chakra-ui/react";
+import UploadImageToStorage from "../ImageUpload";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -68,15 +69,18 @@ export default function Products() {
                       <>{product.inventory.stock}</>
                     )}
                   </td>
-                  {product.images == null ? (
-                    <td className="px-5 py-3 border"></td>
-                  ) : (
+                  {product.images && product.images.length > 0 ? (
                     <td className="px-5 py-3 border">
                       <Image
                         alt="produto"
-                        src={String(product.images[0].imageName)}
-                        width={200}
-                      ></Image>
+                        src={String(product.images[0].imageUrl)}
+                        width={90}
+                        height={100}
+                      />
+                    </td>
+                  ) : (
+                    <td className="px-5 py-3 border">
+                      <UploadImageToStorage product={product} />
                     </td>
                   )}
                   <td className="px-5 py-3 border">

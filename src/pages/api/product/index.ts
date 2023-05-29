@@ -25,7 +25,7 @@ class Product extends Handler {
     try {
       const product = await prisma.product.findMany({
         where: { deleted: false },
-        include: { inventory: true },
+        include: { inventory: true, images: true },
       });
       return res.status(200).json(product);
     } catch (err) {
