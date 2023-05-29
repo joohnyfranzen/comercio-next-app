@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/AdminComponents/ReactPrint/index.jsx",
-    "src/pages/admin/orcamento/index.jsx"
+    "src/pages/admin/orcamento/index.jsx",
+    "src/components/AdminComponents/ImageUpload/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
