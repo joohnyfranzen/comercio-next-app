@@ -18,7 +18,7 @@ export default function Carrousel() {
     if (products.length === 0) {
       submitForm();
     }
-  }, []);
+  }, [products.length]);
 
   const handleSearch = (search: string) => {
     setSearch(search);
