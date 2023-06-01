@@ -62,10 +62,7 @@ export default function SellsLog() {
     totalQuantity: 0,
     totalPrice: 0,
   });
-  const [thisMonth, setThisMonth] = useState({
-    totalQuantity: 0,
-    totalPrice: 0,
-  });
+
   const [lastMoth, setLastMonth] = useState({
     totalQuantity: 0,
     totalPrice: 0,
@@ -83,40 +80,24 @@ export default function SellsLog() {
     const getSevenData = async () => {
       axios.get("/api/log/seven").then((response) => {
         setSevenData(response.data);
-        setThisMonth({
-          totalQuantity: thisMonth.totalQuantity + response.data.totalQuantity,
-          totalPrice: thisMonth.totalPrice + response.data.totalPrice,
-        });
       });
     };
     getSevenData();
     const getFourteenData = async () => {
       axios.get("/api/log/fourteen").then((response) => {
         setFourteenData(response.data);
-        setThisMonth({
-          totalQuantity: thisMonth.totalQuantity + response.data.totalQuantity,
-          totalPrice: thisMonth.totalPrice + response.data.totalPrice,
-        });
       });
     };
     getFourteenData();
     const getTwentyOneData = async () => {
       axios.get("/api/log/twentyOne").then((response) => {
         setTwentyOneData(response.data);
-        setThisMonth({
-          totalQuantity: thisMonth.totalQuantity + response.data.totalQuantity,
-          totalPrice: thisMonth.totalPrice + response.data.totalPrice,
-        });
       });
     };
     getTwentyOneData();
     const getTwentyEightData = async () => {
       axios.get("/api/log/twentyEight").then((response) => {
         setTwentyEightData(response.data);
-        setThisMonth({
-          totalQuantity: thisMonth.totalQuantity + response.data.totalQuantity,
-          totalPrice: thisMonth.totalPrice + response.data.totalPrice,
-        });
       });
     };
     getTwentyEightData();
@@ -140,7 +121,7 @@ export default function SellsLog() {
       });
     };
     getLastThreetoSixMonths();
-  }, [thisMonth.totalQuantity, thisMonth.totalPrice]);
+  }, []);
 
   const labels = [
     "Essa Semana",
@@ -165,7 +146,6 @@ export default function SellsLog() {
           fourteenData.totalPrice,
           twentyOneData.totalPrice,
           twentyEightData.totalPrice,
-          thisMonth.totalPrice,
         ],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
@@ -181,7 +161,6 @@ export default function SellsLog() {
           fourteenData.totalQuantity,
           twentyOneData.totalQuantity,
           twentyEightData.totalQuantity,
-          thisMonth.totalQuantity,
         ],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
@@ -193,7 +172,6 @@ export default function SellsLog() {
       {
         label: "Valor Vendido",
         data: [
-          thisMonth.totalPrice,
           lastMoth.totalPrice,
           beforeLastMonth.totalPrice,
           lastThreetoSixMonths.totalPrice,
@@ -208,7 +186,6 @@ export default function SellsLog() {
       {
         label: "Quantidade Vendida",
         data: [
-          thisMonth.totalQuantity,
           lastMoth.totalQuantity,
           beforeLastMonth.totalQuantity,
           lastThreetoSixMonths.totalQuantity,
