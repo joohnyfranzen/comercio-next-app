@@ -12,12 +12,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-export default function DeleteProduct({ id }: { id: string }) {
+export default function DeleteStockProduct({ id }: { id: string }) {
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const handleDelete = () => {
-    axios.delete(`/api/product/${id}`).then((response) => {
+    axios.delete(`/api/nostockproduct/${id}`).then((response) => {
       console.log("Produto deletado com sucesso!");
       router.reload();
     });
@@ -40,7 +40,7 @@ export default function DeleteProduct({ id }: { id: string }) {
             />
           </ModalHeader>
           <ModalBody className="text-lg">
-            Tem certeza que deseja Remover o produto do Estoque?
+            Tem certeza que deseja Deleter permanentemente o produto?
           </ModalBody>
           <ModalFooter className="flex w-full gap-5">
             <Button onClick={toggleModal} className="text-gray-700">
@@ -65,7 +65,7 @@ export default function DeleteProduct({ id }: { id: string }) {
         bgColor="red.200"
         onClick={toggleModal}
       >
-        Deletar
+        Remover
       </Button>
     </>
   );

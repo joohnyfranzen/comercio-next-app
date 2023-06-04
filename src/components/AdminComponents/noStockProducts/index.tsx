@@ -6,8 +6,10 @@ import Link from "next/link";
 import DeleteProduct from "../DelProduct";
 import { Button } from "@chakra-ui/react";
 import UploadImageToStorage from "../ImageUpload";
+import AddStockProduct from "../AddStockProduct";
+import DeleteStockProduct from "../DelStockProduct";
 
-export default function Products() {
+export default function NoStockProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   var total = 0;
   var totalUsado = 0;
@@ -16,15 +18,16 @@ export default function Products() {
     submitForm();
   }, []);
   const submitForm = () => {
-    axios.get("/api/product").then((response) => setProducts(response.data));
+    axios
+      .get("/api/nostockproduct")
+      .then((response) => setProducts(response.data));
   };
 
   return (
     <div>
-      <h1 className="text-center font-bold text-2xl mb-5">Produtos</h1>
-      <Link className="flex m-5" href="/admin/novoproduto">
-        <Button>Novo Produto</Button>
-      </Link>
+      <h1 className="text-center font-bold text-2xl mb-5">
+        Produtos fora de Estoque
+      </h1>
       <div className="text-center justify-center flex flex-wrap">
         <table className="table-auto">
           <thead>
@@ -34,8 +37,8 @@ export default function Products() {
               <th className="px-5 py-3 border">Estado</th>
               <th className="px-5 py-3 border">Quantidade</th>
               <th className="px-5 py-3 border">Imagem</th>
-              <th className="px-5 py-3 border">Editar</th>
-              <th className="px-5 py-3 border">Remover</th>
+              <th className="px-5 py-3 border">Disponibilizar</th>
+              <th className="px-5 py-3 border">Deletar</th>
             </tr>
           </thead>
           <tbody>
@@ -84,14 +87,10 @@ export default function Products() {
                     </td>
                   )}
                   <td className="px-5 py-3 border">
-                    <Link href={`/admin/editarproduto/${product.id}`}>
-                      <Button variant="solid" color="black" bgColor="green.200">
-                        Editar
-                      </Button>
-                    </Link>
+                    <AddStockProduct id={product.id} />
                   </td>
                   <td className="px-5 py-3 border">
-                    <DeleteProduct id={product.id} />
+                    <DeleteStockProduct id={product.id} />
                   </td>
                 </tr>
               );

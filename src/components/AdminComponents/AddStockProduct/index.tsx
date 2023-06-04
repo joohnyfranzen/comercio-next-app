@@ -12,13 +12,13 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-export default function DeleteProduct({ id }: { id: string }) {
+export default function AddStockProduct({ id }: { id: string }) {
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
-  const handleDelete = () => {
-    axios.delete(`/api/product/${id}`).then((response) => {
-      console.log("Produto deletado com sucesso!");
+  const handleUpdate = () => {
+    axios.put(`/api/nostockproduct/${id}`).then((response) => {
+      console.log("Produto atualizado!");
       router.reload();
     });
   };
@@ -28,7 +28,7 @@ export default function DeleteProduct({ id }: { id: string }) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
-            bg="red.700"
+            bg="green.700"
             className="h-full flex justify-between items-center"
           >
             <h3 className="text-white">Você tem certeza?</h3>
@@ -40,21 +40,21 @@ export default function DeleteProduct({ id }: { id: string }) {
             />
           </ModalHeader>
           <ModalBody className="text-lg">
-            Tem certeza que deseja Remover o produto do Estoque?
+            Você está prestes a disponibilizar este produto para venda.
           </ModalBody>
           <ModalFooter className="flex w-full gap-5">
             <Button onClick={toggleModal} className="text-gray-700">
               Cancelar
             </Button>
             <Button
-              onClick={() => id && handleDelete()}
-              bg="red.800"
+              onClick={() => id && handleUpdate()}
+              bg="green.800"
               _hover={{
-                bg: "red.700",
+                bg: "green.700",
               }}
               className="text-xl font-semibold text-white"
             >
-              Deletar
+              Aceito
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -62,10 +62,10 @@ export default function DeleteProduct({ id }: { id: string }) {
       <Button
         variant="solid"
         color="black"
-        bgColor="red.200"
+        bgColor="green.200"
         onClick={toggleModal}
       >
-        Deletar
+        Tornar Disponível
       </Button>
     </>
   );

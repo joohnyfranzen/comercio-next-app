@@ -1,3 +1,4 @@
+import { Image } from "@/@types/Image";
 import {
   Button,
   Modal,
@@ -11,14 +12,17 @@ import {
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
-export default function DeleteProduct({ id }: { id: string }) {
+export default function DeleteImage({ image }: { image: Image }) {
+  const storage = getStorage();
+  const desertRef = ref(storage, `image/${image.imageName}`);
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const handleDelete = () => {
-    axios.delete(`/api/product/${id}`).then((response) => {
-      console.log("Produto deletado com sucesso!");
+    axios.delete(`/api/image/${image.id}`).then((response) => {
+      console.log("Imagem deletado com sucesso!");
       router.reload();
     });
   };
@@ -40,14 +44,14 @@ export default function DeleteProduct({ id }: { id: string }) {
             />
           </ModalHeader>
           <ModalBody className="text-lg">
-            Tem certeza que deseja Remover o produto do Estoque?
+            Tem certeza que deseja Remover esta Imagem do Produto?
           </ModalBody>
           <ModalFooter className="flex w-full gap-5">
             <Button onClick={toggleModal} className="text-gray-700">
               Cancelar
             </Button>
             <Button
-              onClick={() => id && handleDelete()}
+              onClick={() => image.id && handleDelete()}
               bg="red.800"
               _hover={{
                 bg: "red.700",
@@ -65,7 +69,7 @@ export default function DeleteProduct({ id }: { id: string }) {
         bgColor="red.200"
         onClick={toggleModal}
       >
-        Deletar
+        Deletar Imagem
       </Button>
     </>
   );
