@@ -25,7 +25,7 @@ class Product extends Handler {
     try {
       const product = await prisma.product.findFirst({
         where: { id: String(id) },
-        include: { inventory: true },
+        include: { inventory: true, images: true },
       });
       return res.status(200).json(product);
     } catch (err) {
@@ -36,9 +36,9 @@ class Product extends Handler {
     const prisma = new PrismaClient();
     const id = req.query.id;
     try {
-      const product = await prisma.product.delete({
+      const product = await prisma.product.update({
         where: { id: String(id) },
-        include: { inventory: true },
+        data: { deleted: true },
       });
       return res.status(200).json({ product });
     } catch (err) {
