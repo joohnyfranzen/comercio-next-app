@@ -1,7 +1,11 @@
 import { Product } from "@/@types/Product";
+import DeleteImage from "@/components/AdminComponents/DelImage";
+import UploadImageToStorage from "@/components/AdminComponents/ImageUpload";
 import Layout from "@/components/AdminComponents/Layout";
+import image from "@/pages/api/image";
 import { Button, Input, Select } from "@chakra-ui/react";
 import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -98,6 +102,29 @@ export default function EditarProduto() {
               />
             </div>
           )}
+          {product?.images === null ? (
+            <>Sem imagens</>
+          ) : (
+            <>
+              {product?.images?.map((image) => {
+                return (
+                  <>
+                    {" "}
+                    <Image
+                      key={image.id}
+                      src={String(image.imageUrl)}
+                      height={200}
+                      width={200}
+                      alt="Imagem do Produto"
+                    />
+                    <DeleteImage image={image} />
+                  </>
+                );
+              })}
+            </>
+          )}
+
+          {product && <UploadImageToStorage product={product} />}
           <Button className="mt-5" colorScheme="green" type="submit">
             Editar
           </Button>
