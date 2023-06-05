@@ -10,6 +10,7 @@ export type Product = {
   userProducts: UserProduct[];
   inventory?: Inventory;
   images?: Image[];
+  discount: number;
 
   visible?: boolean;
 };
