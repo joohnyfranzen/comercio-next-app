@@ -23,8 +23,8 @@ export const contactMethods: ContactMethod[] = [
         />
       </svg>
     ),
-    contact: "Willy Dorow 29, Rau, Jaraguá do Sul - SC, 89254-085",
-    title: "Our office",
+    contact: "Waldemar Rau 141, Rau, Jaraguá do Sul - SC, 89254-260",
+    title: "Nossa Loja",
   },
   {
     icon: (
@@ -44,7 +44,7 @@ export const contactMethods: ContactMethod[] = [
       </svg>
     ),
     contact: "(47) 9 9625-9348",
-    title: "Phone",
+    title: "Telefone",
     href: "https://api.whatsapp.com/send?phone=5547996259348",
   },
   {
@@ -64,7 +64,7 @@ export const contactMethods: ContactMethod[] = [
         />
       </svg>
     ),
-    contact: "Support@example.com",
+    contact: "com-eliane@outlook.com",
     title: "Email",
     href: "mailto:com-eliane@outlook.com",
   },

@@ -83,10 +83,17 @@ export function SmallProduct({
       </div>
       <div className="flex justify-between items-end w-full mt-8">
         <PriceSmallItem product={product} />
-        <Button colorScheme="green" className={currentColor}>
-          <ShoppingOutlined />
-          <span className="">Adicionar</span>
-        </Button>
+        {product.state === "novo" ? (
+          <Button colorScheme="green" className={currentColor}>
+            <ShoppingOutlined />
+            <span className="">Adicionar</span>
+          </Button>
+        ) : (
+          <Button colorScheme="red" className={currentColor} disabled>
+            <ShoppingOutlined />
+            <span className="">Usado</span>
+          </Button>
+        )}
       </div>
     </a>
   );

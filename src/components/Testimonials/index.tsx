@@ -11,14 +11,11 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-3 lg:items-center lg:gap-x-16">
           <div className="max-w-xl text-center sm:text-left">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Dont just take our word for it...
-              <br className="hidden sm:block lg:hidden" />
-              Read reviews from our customers
+              Veja o comentário de nossos clientes!
             </h2>
 
             <p className="mt-4 text-gray-500">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas
-              veritatis illo placeat harum porro optio fugit a culpa sunt id!
+              Temos satisfação em atender bem, com qualdiadde e preço justo.
             </p>
 
             <div className="hidden lg:mt-8 lg:flex lg:gap-4">
@@ -69,31 +66,28 @@ export default function Testimonials() {
               >
                 <SwiperSlide>
                   <TestimonialsCard
-                    name="John Doe"
+                    name="Anelize Fachim de Barcellos"
                     stars={5}
-                    title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam"
-                    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-                    voluptas, quae, quod, voluptate quibusdam voluptates"
+                    title="Pude comprar por whatsapp e eles entregaram no mesmo dia e fiz o pagamento no local. Amei a agilidade do atendimento."
+                    text=""
                   />
                 </SwiperSlide>
 
                 <SwiperSlide>
                   <TestimonialsCard
-                    name="John Doe"
+                    name="Mariza Barros"
                     stars={5}
-                    title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam"
-                    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-                    voluptas, quae, quod, voluptate quibusdam voluptates"
+                    title="Ótimo lugar para quem quer comprar móveis usados com um preço justo e entregas rápidas."
+                    text=""
                   />
                 </SwiperSlide>
 
                 <SwiperSlide>
                   <TestimonialsCard
-                    name="John Doe"
+                    name="Jeferson Vargas"
                     stars={5}
-                    title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam"
-                    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-                    voluptas, quae, quod, voluptate quibusdam voluptates"
+                    title="Móveis de primeira e preços ótimos!"
+                    text=""
                   />
                 </SwiperSlide>
               </Swiper>

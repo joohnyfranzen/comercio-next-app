@@ -7,15 +7,15 @@ export default function Contact() {
       <main className="py-14">
         <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
           <div className="max-w-xl space-y-3">
-            <h3 className="text-indigo-600 font-semibold">Contact</h3>
+            <h3 className="text-indigo-600 font-semibold">Contato</h3>
             <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Como podemos ajudá-lo(a)?
             </p>
             <p>
-              Estamos à disposição para ajudá-lo(a) e esclarecer qualquer dúvida
-              que você possa ter sobre nossos móveis e eletrônicos. Ficaremos
-              felizes em atendê-lo(a)! Entre em contato conosco por telefone ou
-              Whatsapp para um atendimento personalizado.
+              Estamos à disposição para ajudar e esclarecer qualquer dúvida que
+              você possa ter sobre nossos móveis. Ficaremos felizes em
+              atendê-lo(a)! Entre em contato conosco por telefone ou Whatsapp
+              para um atendimento personalizado.
             </p>
           </div>
           <div>
