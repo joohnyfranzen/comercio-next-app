@@ -11,6 +11,7 @@ export type Product = {
   inventory?: Inventory;
   images?: Image[];
   discount: number;
-
+  createdAt: Date;
+  updatedAt: Date;
   visible?: boolean;
 };

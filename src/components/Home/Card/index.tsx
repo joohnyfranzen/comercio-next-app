@@ -15,7 +15,7 @@ export default function Card() {
           </h1>
 
           <p className="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">
-            Seja bem vindo a plataforma do moveis Eliane, conforto e tradição em
+            Seja bem vindo a plataforma do Moveis Eliane, conforto e tradição em
             um só lugar!
           </p>
 

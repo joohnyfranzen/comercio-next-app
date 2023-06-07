@@ -5,9 +5,10 @@ export default function Annoucements() {
     <div className="fixed inset-x-0 bottom-0 p-4 z-20">
       <div className="relative flex items-center justify-between gap-4 rounded-lg bg-indigo-600 px-4 py-3 text-white shadow-lg">
         <p className="text-sm font-medium">
-          Love Alpine JS?
-          <a href="#" className="inline-block underline">
-            Check out this new course!
+          Fique por dentro de nossas novidades e promoções! siganos nas redes
+          sociais
+          <a href="/contato" className="inline-block underline ml-2">
+            Clicando Aqui!
           </a>
         </p>
 

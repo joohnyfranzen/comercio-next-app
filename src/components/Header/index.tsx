@@ -53,14 +53,20 @@ export default function Header() {
               className="hidden lg:flex lg:gap-4 lg:text-xs lg:font-bold lg:uppercase lg:tracking-wide lg:text-gray-500"
             >
               <Link
-                href="/about"
+                href="/"
+                className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-green-700"
+              >
+                Inicio
+              </Link>
+              <Link
+                href="/sobre"
                 className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-green-700"
               >
                 Sobre
               </Link>
 
               <Link
-                href="/news"
+                href="/novidades"
                 className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-green-700"
               >
                 Novidades
@@ -74,7 +80,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/contact"
+                href="/contato"
                 className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-green-700"
               >
                 Contato
