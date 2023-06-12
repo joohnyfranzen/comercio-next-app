@@ -23,7 +23,6 @@ class Log extends Handler {
         },
       });
 
-      console.log(userProduct);
       return res.status(200).json(userProduct);
     } catch (err) {
       return res.status(400).json({ message: err });

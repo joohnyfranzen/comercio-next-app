@@ -27,10 +27,6 @@ class Seven extends Handler {
         return total + userProduct.product.price;
       }, 0);
 
-      console.log(userProducts);
-      console.log("Total Quantity:", totalQuantity);
-      console.log("Total Price:", totalPrice);
-
       return res.status(200).json({
         totalQuantity,
         totalPrice,

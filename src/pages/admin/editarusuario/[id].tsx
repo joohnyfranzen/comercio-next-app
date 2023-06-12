@@ -32,9 +32,7 @@ export default function EditarProduto() {
       price: priceRef.current?.value,
       state: stateRef.current?.value,
     };
-    axios.put(`/api/product/${id}`, updatedProduct).then((response) => {
-      console.log("Produto atualizado com sucesso!");
-    });
+    axios.put(`/api/product/${id}`, updatedProduct).then((response) => {});
     if (product?.inventory) {
       const updatedStock = {
         ...product.inventory,
@@ -42,18 +40,14 @@ export default function EditarProduto() {
       };
       axios
         .put(`/api/inventory/${product.inventory.id}`, updatedStock)
-        .then((response) => {
-          console.log("Estoque atualizado com sucesso!");
-        });
+        .then((response) => {});
     }
     if (product?.inventory === undefined) {
       const newStock = {
         stock: stockRef.current?.value,
         productId: product?.id,
       };
-      axios.post(`/api/inventory`, newStock).then((response) => {
-        console.log("Estoque criado com sucesso!");
-      });
+      axios.post(`/api/inventory`, newStock).then((response) => {});
     }
   };
 

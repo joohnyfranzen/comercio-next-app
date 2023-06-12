@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 interface Alert {
   status: "error" | "loading" | "success" | "info" | "warning" | undefined;

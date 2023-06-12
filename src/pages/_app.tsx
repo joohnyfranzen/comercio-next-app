@@ -27,14 +27,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const isAdminAuthenticated = UseAdminAuthStore(
     (state) => state.isAuthenticated
   );
-  console.log(isAdminAuthenticated);
   useEffect(() => {
     const checkAuthentication = async () => {
       if (router.pathname.startsWith("/admin")) {
         const authenticated = await checkAdminAuthentication(
           isAdminAuthenticated
         ); // Passe o estado como argumento para a função
-        console.log(isAdminAuthenticated);
         if (!authenticated) {
           // Verifique se o usuário não está autenticado como administrador
           router.push("/login");

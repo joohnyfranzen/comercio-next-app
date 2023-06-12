@@ -15,7 +15,6 @@ class Product extends Handler {
       where: { id: String(id) },
       data: updateBody,
     });
-    console.log(product);
   }
   async get(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();

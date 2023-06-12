@@ -29,7 +29,6 @@ export default function Login() {
           setMessage(
             `Olá ${response.data.user.name}, seja bem vindo novamente!`
           );
-          console.log(response.data);
         });
     } catch (error) {
       // Tratar o erro aqui, como exibir uma mensagem de erro
