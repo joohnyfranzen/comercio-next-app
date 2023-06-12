@@ -49,10 +49,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <SessionProvider session={pageProps.session}>
       <ChakraProvider theme={theme}>
         {status && (
-          <Alert variant="solid" status={status}>
-            <AlertIcon />
-            {message}
-          </Alert>
+          <div className="sticky top-0 z-50">
+            <Alert variant="solid" status={status}>
+              <AlertIcon />
+              {message}
+            </Alert>
+          </div>
         )}
         <Component {...pageProps} />
       </ChakraProvider>
