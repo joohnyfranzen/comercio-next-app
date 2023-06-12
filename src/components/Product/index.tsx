@@ -3,6 +3,7 @@ import { ShoppingOutlined } from "@ant-design/icons";
 import { Button, Tag } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 const colors = ["bg-green-100", "bg-red-100"];
 
 export default function Product({ product }: { product: ProductType }) {
@@ -84,15 +85,25 @@ export function SmallProduct({
       <div className="flex justify-between items-end w-full mt-8">
         <PriceSmallItem product={product} />
         {product.state === "novo" ? (
-          <Button colorScheme="green" className={currentColor}>
-            <ShoppingOutlined />
-            <span className="">Adicionar</span>
-          </Button>
+          <Link
+            target="_blank"
+            href={`https://wa.me/5547996259348?text=Gostaria%20de%20saber%20mais%20sobre%20o%20produto%20${product.name}%20${product.price}.%0D%0A%0D%0Ahttps%3A%2F%2Fwww.moveis-eliane.com%2Fprodutos%2F${product.id}`}
+          >
+            <Button colorScheme="green" className={currentColor}>
+              <ShoppingOutlined />
+              <span className="">Comprar</span>
+            </Button>
+          </Link>
         ) : (
-          <Button colorScheme="red" className={currentColor} disabled>
-            <ShoppingOutlined />
-            <span className="">Usado</span>
-          </Button>
+          <Link
+            target="_blank"
+            href={`https://wa.me/5547996259348?text=Gostaria%20de%20saber%20mais%20sobre%20o%20produto%20${product.name}%20${product.price}.%0D%0A%0D%0Ahttps%3A%2F%2Fwww.moveis-eliane.com%2Fprodutos%2F${product.id}`}
+          >
+            <Button colorScheme="red" className={currentColor} disabled>
+              <ShoppingOutlined />
+              <span className="">Comprar</span>
+            </Button>
+          </Link>
         )}
       </div>
     </a>
