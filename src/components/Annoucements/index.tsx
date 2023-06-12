@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Annoucements() {
@@ -7,9 +8,9 @@ export default function Annoucements() {
         <p className="text-sm font-medium">
           Fique por dentro de nossas novidades e promoções! Siganos nas redes
           sociais
-          <a href="/contato" className="inline-block underline ml-2">
+          <Link href="/contato" className="inline-block underline ml-2">
             Clicando Aqui!
-          </a>
+          </Link>
         </p>
 
         <button
