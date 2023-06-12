@@ -8,16 +8,14 @@ class Product extends Handler {
     const id = req.query.id;
     let updateBody = req.body;
     delete updateBody.id;
+    delete updateBody.images;
+
     updateBody.price = Number(updateBody.price);
-    try {
-      const product = await prisma.product.update({
-        where: { id: String(id) },
-        data: updateBody,
-      });
-      return res.status(200).json({ product });
-    } catch (error) {
-      return res.status(400).json({ message: error });
-    }
+    const product = await prisma.product.update({
+      where: { id: String(id) },
+      data: updateBody,
+    });
+    console.log(product);
   }
   async get(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();

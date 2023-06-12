@@ -13,22 +13,40 @@ import React, { RefObject, useRef, useState } from "react";
 import { storage } from "../../../../firebaseConfig";
 import { Product } from "@/@types/Product";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useAlertStore } from "@/store/alertStore";
 
 export default function UploadImageToStorage({
   product,
 }: {
   product: Product;
 }) {
+  const { setStatus, setMessage } = useAlertStore();
+  const router = useRouter();
+
   const [imageFile, setImageFile] = useState<File>();
   const [downloadURL, setDownloadURL] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [progressUpload, setProgressUpload] = useState(0);
   const updateProductImage = (url: string) => {
-    axios.post("/api/image", {
-      id: product.id,
-      imageUrl: url,
-      imageName: imageFile?.name,
-    });
+    axios
+      .post("/api/image", {
+        id: product.id,
+        imageUrl: url,
+        imageName: imageFile?.name,
+      })
+      .then((response) => {
+        setStatus("success");
+        setMessage(
+          `Imagem ${response.data.image.name} adicionada com sucesso!`
+        );
+        router.reload();
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao deletar imagem. ${error}.`);
+        router.reload();
+      });
   };
 
   const handleSelectedFile = (files: any) => {

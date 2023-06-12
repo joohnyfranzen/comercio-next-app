@@ -1,3 +1,4 @@
+import { useAlertStore } from "@/store/alertStore";
 import { Button, Input, Select } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -11,7 +12,7 @@ interface FormValues {
 
 export default function NewProduct() {
   const router = useRouter();
-
+  const { setStatus, setMessage } = useAlertStore();
   const [formData, setFormData] = useState<FormValues>({
     name: "",
     price: "",
@@ -35,54 +36,67 @@ export default function NewProduct() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post("/api/product", formData).then((res) => {
-      router.push("/admin/produtos");
-    });
+    axios
+      .post("/api/product", formData)
+      .then((res) => {
+        setStatus("success");
+        setMessage(
+          `Produto ${res.data.product.name}, preço ${res.data.product.price}, criado com sucesso!`
+        );
+        router.push("/admin/produtos");
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao criar produto. ${error}.`);
+        router.reload();
+      });
   };
 
   return (
-    <div className="flex justify-center mt-20">
-      <form className="w-96 center" onSubmit={handleSubmit}>
-        <h1 className="text-2xl text-center">Adicionar Novo Produto</h1>
-        <div>
-          <Input
-            className=" w-full p-2  mt-3 border-2 border-gray-200"
-            type="text"
-            name="name"
-            placeholder="Nome do Produto"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-          <br />
-          <Input
-            className=" w-full p-2  mt-3 border-2 border-gray-200"
-            type="number"
-            name="price"
-            placeholder="Valor"
-            value={formData.price}
-            onChange={handleInputChange}
-          />
-          <br />
-          <p>Estado</p>
-          <Select
-            className="mb-3"
-            name="state"
-            value={formData.state}
-            onChange={handleSelectChange}
-            placeholder="Selecione o estado"
-          >
-            <option value={"usado"}>Usado</option>
-            <option value={"novo"}>Novo</option>
-          </Select>
-          <Button
-            colorScheme="facebook"
-            className=" w-full p-2  border-2 border-gray-200"
-            type="submit"
-          >
-            Criar Produto
-          </Button>
-        </div>
-      </form>
-    </div>
+    <>
+      <div className="flex justify-center mt-20">
+        <form className="w-96 center" onSubmit={handleSubmit}>
+          <h1 className="text-2xl text-center">Adicionar Novo Produto</h1>
+          <div>
+            <Input
+              className="w-full p-2 mt-3 border-2 border-gray-200"
+              type="text"
+              name="name"
+              placeholder="Nome do Produto"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+            <br />
+            <Input
+              className="w-full p-2 mt-3 border-2 border-gray-200"
+              type="number"
+              name="price"
+              placeholder="Valor"
+              value={formData.price}
+              onChange={handleInputChange}
+            />
+            <br />
+            <p>Estado</p>
+            <Select
+              className="mb-3"
+              name="state"
+              value={formData.state}
+              onChange={handleSelectChange}
+              placeholder="Selecione o estado"
+            >
+              <option value={"usado"}>Usado</option>
+              <option value={"novo"}>Novo</option>
+            </Select>
+            <Button
+              colorScheme="facebook"
+              className="w-full p-2 border-2 border-gray-200"
+              type="submit"
+            >
+              Criar Produto
+            </Button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }

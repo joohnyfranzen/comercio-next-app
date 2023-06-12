@@ -1,3 +1,4 @@
+import { useAlertStore } from "@/store/alertStore";
 import {
   Button,
   Modal,
@@ -12,15 +13,33 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-export default function DeleteStockProduct({ id }: { id: string }) {
+interface DeleteProductProps {
+  id: string;
+  onDelete: () => void;
+}
+export default function DeleteStockProduct({
+  id,
+  onDelete,
+}: DeleteProductProps) {
+  const { setStatus, setMessage } = useAlertStore();
+
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const handleDelete = () => {
-    axios.delete(`/api/nostockproduct/${id}`).then((response) => {
-      console.log("Produto deletado com sucesso!");
-      router.reload();
-    });
+    axios
+      .delete(`/api/nostockproduct/${id}`)
+      .then((response) => {
+        onDelete();
+        setStatus("success");
+        setMessage(
+          `Produto ${response.data.product.name} permanentemente deletado com sucesso!`
+        );
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao deletar produto. ${error}.`);
+      });
   };
   return (
     <>

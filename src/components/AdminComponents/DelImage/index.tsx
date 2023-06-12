@@ -13,18 +13,31 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { getStorage, ref, deleteObject } from "firebase/storage";
-
-export default function DeleteImage({ image }: { image: Image }) {
+import { useAlertStore } from "@/store/alertStore";
+interface DeleteImageProps {
+  image: Image;
+  onDelete: () => void;
+}
+export default function DeleteImage({ image, onDelete }: DeleteImageProps) {
   const storage = getStorage();
+  const { setStatus, setMessage } = useAlertStore();
+
   const desertRef = ref(storage, `image/${image.imageName}`);
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const handleDelete = () => {
-    axios.delete(`/api/image/${image.id}`).then((response) => {
-      console.log("Imagem deletado com sucesso!");
-      router.reload();
-    });
+    axios
+      .delete(`/api/image/${image.id}`)
+      .then((res) => {
+        setStatus("success");
+        setMessage(`Imagem ${res.data.imageName} deletada com sucesso!`);
+        onDelete();
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao deletar imagem. ${error}.`);
+      });
   };
   return (
     <>

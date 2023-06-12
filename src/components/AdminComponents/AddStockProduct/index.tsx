@@ -1,3 +1,4 @@
+import { useAlertStore } from "@/store/alertStore";
 import {
   Button,
   Modal,
@@ -12,15 +13,30 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-export default function AddStockProduct({ id }: { id: string }) {
+interface UpdateProductProps {
+  id: string;
+  onUpdate: () => void;
+}
+export default function AddStockProduct({ id, onUpdate }: UpdateProductProps) {
+  const { setStatus, setMessage } = useAlertStore();
+
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const handleUpdate = () => {
-    axios.put(`/api/nostockproduct/${id}`).then((response) => {
-      console.log("Produto atualizado!");
-      router.reload();
-    });
+    axios
+      .put(`/api/nostockproduct/${id}`)
+      .then((res) => {
+        setStatus("success");
+        setMessage(
+          `Produto ${res.data.product.name} adicionado ao estoque com sucesso!`
+        );
+        onUpdate();
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao adicionar produto. ${error}.`);
+      });
   };
   return (
     <>

@@ -5,9 +5,11 @@ import axios from "axios";
 import { NewSell } from "@/@types/NewSell";
 import { User } from "@/@types/User";
 import { useRouter } from "next/router";
+import { useAlertStore } from "@/store/alertStore";
 
 export default function NewSell() {
   const router = useRouter();
+  const { setStatus, setMessage } = useAlertStore();
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -57,11 +59,18 @@ export default function NewSell() {
       },
       userProducts: selectedProducts,
     };
-    axios.post("/api/userproduct", formData).then((res) => {
-      console.log(res.data);
-
-      router.push("/admin/vendas");
-    });
+    axios
+      .post("/api/userproduct", formData)
+      .then((res) => {
+        setStatus("success");
+        setMessage(`Venda ${res.data.order.id} finalizada com sucesso!`);
+        router.push("/admin/vendas");
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao finalizar venda. ${error}.`);
+        router.reload();
+      });
   };
   const addProduct = () => {
     setProductCount((prevCount) => [...prevCount, prevCount.length + 1]);

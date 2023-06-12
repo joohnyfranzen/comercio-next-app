@@ -87,10 +87,16 @@ export default function NoStockProducts() {
                     </td>
                   )}
                   <td className="px-5 py-3 border">
-                    <AddStockProduct id={product.id} />
+                    <AddStockProduct
+                      id={product.id}
+                      onUpdate={() => submitForm()}
+                    />
                   </td>
                   <td className="px-5 py-3 border">
-                    <DeleteStockProduct id={product.id} />
+                    <DeleteStockProduct
+                      id={product.id}
+                      onDelete={() => submitForm()}
+                    />
                   </td>
                 </tr>
               );

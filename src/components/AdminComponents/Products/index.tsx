@@ -18,7 +18,6 @@ export default function Products() {
   const submitForm = () => {
     axios.get("/api/product").then((response) => setProducts(response.data));
   };
-
   return (
     <div>
       <h1 className="text-center font-bold text-2xl mb-5">Produtos</h1>
@@ -91,7 +90,10 @@ export default function Products() {
                     </Link>
                   </td>
                   <td className="px-5 py-3 border">
-                    <DeleteProduct id={product.id} />
+                    <DeleteProduct
+                      id={product.id}
+                      onDelete={() => submitForm()}
+                    />
                   </td>
                 </tr>
               );

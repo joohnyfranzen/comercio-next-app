@@ -2,7 +2,7 @@ import { Product } from "@/@types/Product";
 import DeleteImage from "@/components/AdminComponents/DelImage";
 import UploadImageToStorage from "@/components/AdminComponents/ImageUpload";
 import Layout from "@/components/AdminComponents/Layout";
-import image from "@/pages/api/image";
+import { useAlertStore } from "@/store/alertStore";
 import { Button, Input, Select } from "@chakra-ui/react";
 import axios from "axios";
 import Image from "next/image";
@@ -17,15 +17,16 @@ export default function EditarProduto() {
   const priceRef = useRef<HTMLInputElement>(null);
   const stateRef = useRef<HTMLSelectElement>(null);
   const stockRef = useRef<HTMLInputElement>(null);
+  const { setStatus, setMessage } = useAlertStore();
 
+  const submitForm = () => {
+    axios
+      .get(`/api/product/${id}`)
+      .then((response) => setProduct(response.data));
+  };
   useEffect(() => {
-    const getProduct = () => {
-      axios
-        .get(`/api/product/${id}`)
-        .then((response) => setProduct(response.data));
-    };
     if (id) {
-      getProduct();
+      submitForm();
     }
   }, [id]);
 
@@ -38,9 +39,18 @@ export default function EditarProduto() {
       state: stateRef.current?.value,
       inventory: undefined,
     };
-    axios.put(`/api/product/${id}`, updatedProduct).then((response) => {
-      console.log("Produto atualizado com sucesso!");
-    });
+    axios
+      .put(`/api/product/${id}`, updatedProduct)
+      .then((response) => {
+        setStatus("success");
+        setMessage(
+          `Produto ${response.data.product.name} editado com sucesso!`
+        );
+      })
+      .catch((error) => {
+        setStatus("error");
+        setMessage(`Erro ao editar produto. ${error}.`);
+      });
     if (product?.inventory) {
       const updatedStock = {
         ...product.inventory,
@@ -49,8 +59,13 @@ export default function EditarProduto() {
       axios
         .put(`/api/inventory/${product.inventory.id}`, updatedStock)
         .then((response) => {
-          console.log("Estoque atualizado com sucesso!");
-          router.push("/admin/produtos");
+          setStatus("success");
+          setMessage(`Produto ${product.name} editado com sucesso!`);
+          submitForm();
+        })
+        .catch((error) => {
+          setStatus("error");
+          setMessage(`Erro ao editar produto ${product.name}. ${error}.`);
         });
     }
     if (product?.inventory === null) {
@@ -58,10 +73,17 @@ export default function EditarProduto() {
         stock: stockRef.current?.value,
         productId: product?.id,
       };
-      axios.post(`/api/inventory`, newStock).then((response) => {
-        console.log("Estoque criado com sucesso!");
-        router.push("/admin/produtos");
-      });
+      axios
+        .post(`/api/inventory`, newStock)
+        .then(() => {
+          setStatus("success");
+          setMessage(`Produto ${product.name} editado com sucesso!`);
+          submitForm();
+        })
+        .catch((error) => {
+          setStatus("error");
+          setMessage(`Erro ao editar produto ${product.name}. ${error}.`);
+        });
     }
   };
 
@@ -117,7 +139,7 @@ export default function EditarProduto() {
                       width={200}
                       alt="Imagem do Produto"
                     />
-                    <DeleteImage image={image} />
+                    <DeleteImage image={image} onDelete={() => submitForm()} />
                   </>
                 );
               })}

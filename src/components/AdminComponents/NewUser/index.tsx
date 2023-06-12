@@ -2,8 +2,11 @@ import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useAlertStore } from "@/store/alertStore";
 export default function NewUser() {
   const router = useRouter();
+  const { setStatus, setMessage } = useAlertStore();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,12 +30,16 @@ export default function NewUser() {
     axios
       .post("/api/user", formData)
       .then((response) => {
-        console.log(response.data);
-
-        router.push("/admin/usuarios");
+        setStatus("success");
+        setMessage(
+          `Novo usuário ${response.data.user.name} criado com sucesso!`
+        );
+        router.reload();
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setStatus("error");
+        setMessage(`Erro ao cadastrar usuário. ${error}.`);
+        router.reload();
       });
   };
 
