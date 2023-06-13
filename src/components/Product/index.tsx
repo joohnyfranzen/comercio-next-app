@@ -73,7 +73,9 @@ export function SmallProduct({
           )} */}
         </div>
         <Image
-          src={hasImages ? product?.images?.[0].imageUrl : "/SVG/furniture.svg"}
+          src={`${
+            hasImages ? product?.images?.[0].imageUrl : "/SVG/furniture.svg"
+          }`}
           alt={product.name + " image"}
           width={200}
           height={200}
