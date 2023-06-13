@@ -81,7 +81,7 @@ export default function Product() {
                     {product?.name}
                   </h1>
 
-                  <p className="text-sm">Highest Rated Product</p>
+                  <p className="text-sm">Produto de alta procura</p>
 
                   <div className="-ml-0.5 flex">
                     <svg
@@ -133,134 +133,7 @@ export default function Product() {
 
                 <p className="text-lg font-bold">R$ {product?.price},00</p>
               </div>
-
-              <div className="mt-4">
-                <div className="prose max-w-none">
-                  <p>Algo bem útil</p>
-                </div>
-
-                <button className="mt-2 text-sm font-medium underline">
-                  Read More
-                </button>
-              </div>
-
               <form className="mt-8">
-                <fieldset>
-                  <legend className="mb-1 text-sm font-medium">Color</legend>
-
-                  <div className="flex flex-wrap gap-1">
-                    <label htmlFor="color_tt" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="color"
-                        id="color_tt"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        Texas Tea
-                      </span>
-                    </label>
-
-                    <label htmlFor="color_fr" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="color"
-                        id="color_fr"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        Fiesta Red
-                      </span>
-                    </label>
-
-                    <label htmlFor="color_cb" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="color"
-                        id="color_cb"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-block rounded-full border px-3 py-1 text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        Cobalt Blue
-                      </span>
-                    </label>
-                  </div>
-                </fieldset>
-
-                <fieldset className="mt-4">
-                  <legend className="mb-1 text-sm font-medium">Size</legend>
-
-                  <div className="flex flex-wrap gap-1">
-                    <label htmlFor="size_xs" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="size"
-                        id="size_xs"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        XS
-                      </span>
-                    </label>
-
-                    <label htmlFor="size_s" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="size"
-                        id="size_s"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        S
-                      </span>
-                    </label>
-
-                    <label htmlFor="size_m" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="size"
-                        id="size_m"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        M
-                      </span>
-                    </label>
-
-                    <label htmlFor="size_l" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="size"
-                        id="size_l"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        L
-                      </span>
-                    </label>
-
-                    <label htmlFor="size_xl" className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="size"
-                        id="size_xl"
-                        className="peer sr-only"
-                      />
-
-                      <span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
-                        XL
-                      </span>
-                    </label>
-                  </div>
-                </fieldset>
-
                 <div className="mt-8 flex gap-4">
                   <div>
                     <label htmlFor="quantity" className="sr-only">
@@ -271,7 +144,11 @@ export default function Product() {
                       type="number"
                       id="quantity"
                       min="1"
-                      value="1"
+                      value={
+                        product?.inventory?.stock === null
+                          ? "1"
+                          : `${product?.inventory?.stock}`
+                      }
                       className="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </div>
