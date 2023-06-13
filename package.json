@@ -32,7 +32,6 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
-    "react-icons": "^4.9.0",
     "react-to-print": "^2.14.12",
     "swiper": "^9.3.2",
     "swr": "^2.1.5",

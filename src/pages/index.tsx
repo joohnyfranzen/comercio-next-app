@@ -13,7 +13,6 @@ import Annoucements from "@/components/Annoucements";
 import { useEffect, useState } from "react";
 import { Product } from "@/@types/Product";
 import { productProvider } from "@/services/product";
-import { FaMoneyBillWave, FaMoneyBill } from "react-icons/fa";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -85,15 +84,11 @@ export default function Home() {
             <div className="w-full bg-gray-100 py-5 border-b border-gray-300 mb-16">
               <div className="lg:w-3/4 w-full mx-auto flex justify-between gap-7 text-gray-600">
                 <Text fontSize="xl" className="flex gap-2">
-                  <label className="semi-bold">
-                    <FaMoneyBill size={30} />
-                  </label>
+                  <label className="semi-bold"></label>
                   Moveis Eliane
                 </Text>
                 <Text fontSize="xl" className="flex gap-2">
-                  <label className="semi-bold">
-                    <FaMoneyBillWave size={30} />
-                  </label>
+                  <label className="semi-bold"></label>
                   Moveis Eliane
                 </Text>
                 <Text fontSize="xl" fontWeight="bold">
