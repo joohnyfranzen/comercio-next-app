@@ -40,7 +40,7 @@ export default function ScroolProducts({
   }, []);
 
   return (
-    <>
+    <div className="mb-24">
       <Text
         fontSize="2xl"
         fontWeight="medium"
@@ -68,6 +68,6 @@ export default function ScroolProducts({
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 }

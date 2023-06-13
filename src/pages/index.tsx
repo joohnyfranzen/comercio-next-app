@@ -13,6 +13,8 @@ import Annoucements from "@/components/Annoucements";
 import { useEffect, useState } from "react";
 import { Product } from "@/@types/Product";
 import { productProvider } from "@/services/product";
+import { MdOutlineCountertops } from "react-icons/md";
+import { FaMoneyBillWave } from "react-icons/fa";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -80,8 +82,30 @@ export default function Home() {
       <div className="flex flex-col min-h-screen">
         <main className="flex-1">
           <Card />
-          <div className="bg-gray-50 py-16">
-            <div className="mx-auto lg:w-3/4 w-full px-16 lg:px-auto flex flex-col gap-7">
+          <div className="bg-gray-50">
+            <div className="w-full bg-gray-100 py-5 border-b border-gray-300 mb-16">
+              <div className="lg:w-3/4 w-full mx-auto flex justify-between gap-7 text-gray-600">
+                <Text fontSize="xl" className="flex gap-2">
+                  <label className="semi-bold">
+                    <MdOutlineCountertops size={30} />
+                  </label>
+                  Moveis Eliane
+                </Text>
+                <Text fontSize="xl" className="flex gap-2">
+                  <label className="semi-bold">
+                    <FaMoneyBillWave size={30} />
+                  </label>
+                  Moveis Eliane
+                </Text>
+                <Text fontSize="xl" fontWeight="bold">
+                  Moveis Eliane
+                </Text>
+                <Text fontSize="xl" fontWeight="bold">
+                  Moveis Eliane
+                </Text>
+              </div>
+            </div>
+            <div className="mx-auto lg:w-3/4 w-full lg:px-auto flex flex-col gap-7">
               <ScroolProducts title="Todos Novos!" products={newProducts} />
               {balcãoProducts.length > 0 && (
                 <ScroolProducts

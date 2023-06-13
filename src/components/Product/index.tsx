@@ -36,6 +36,10 @@ export function SmallProduct({
 }) {
   const currentColor = colors[i % colors.length];
 
+  const hasImages = useMemo(() => {
+    return product.images && product.images.length > 0;
+  }, [product.images]);
+
   // const tag = useMemo(() => {
   //   if (product.tags && product.tags?.length > 0) {
   //     const firstTag = product.tags[0];
@@ -55,9 +59,11 @@ export function SmallProduct({
     >
       <div>
         <div className="absolute top-0 left-0 z-10">
-          <Tag size="sm" colorScheme="green">
-            {100 - discountPercent}% OFF
-          </Tag>
+          {discountPercent > 0 && (
+            <Tag size="sm" colorScheme="green">
+              {100 - discountPercent}% OFF
+            </Tag>
+          )}
           {/* {product.discount && (
           )}
           {tag && (
@@ -66,30 +72,34 @@ export function SmallProduct({
             </Tag>
           )} */}
         </div>
-        <div className="w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-3 xl:aspect-w-7">
-          {product.images && product.images.length > 0 ? (
-            <Image
-              fill
-              src={product.images[0].imageUrl}
-              alt={product.name + " image"}
-              className="h-full w-full object-cover object-center group-hover:opacity-75"
-            />
-          ) : (
-            <div className="h-full w-full" />
-          )}
-        </div>
-        <h3 className="mt-4 text-xl font-semibold text-gray-700">
+        <Image
+          src={hasImages ? product?.images?.[0].imageUrl : "/SVG/furniture.svg"}
+          alt={product.name + " image"}
+          width={200}
+          height={200}
+          style={{
+            opacity: hasImages ? 1 : 0.5,
+          }}
+          className="h-[200px] w-[200px] object-cover object-center group-hover:opacity-75"
+        />
+        <h3 className="mt-4 text-lg font-semibold text-gray-700 line-clamp-1">
           {product.name}
         </h3>
       </div>
-      <div className="flex justify-between items-end w-full mt-8">
+      <div className="flex flex-col w-full mt-2">
         <PriceSmallItem product={product} />
         {product.state === "novo" ? (
           <Link
             target="_blank"
             href={`https://wa.me/5547996259348?text=Gostaria%20de%20saber%20mais%20sobre%20o%20produto%20${product.name}%20${product.price}.%0D%0A%0D%0Ahttps%3A%2F%2Fwww.moveis-eliane.com%2Fprodutos%2F${product.id}`}
           >
-            <Button colorScheme="green" className={currentColor}>
+            <Button
+              h={30}
+              w={"full"}
+              rounded={"full"}
+              colorScheme="green"
+              className={currentColor}
+            >
               <ShoppingOutlined />
               <span className="">Comprar</span>
             </Button>
@@ -113,7 +123,7 @@ export function SmallProduct({
 export function PriceSmallItem({ product }: { product: ProductType }) {
   if (product.discount) {
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full text-center">
         <p className="mt-1 text-lg font-medium text-gray-900 line-through">
           R$ {product.discount},00
         </p>

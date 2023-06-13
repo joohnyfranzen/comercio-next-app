@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Annoucements() {
   return (
-    <div className="fixed inset-x-0 bottom-0 p-4 z-20">
+    <div className="fixed inset-x-0 bottom-0 p-4 z-20 hidden">
       <div className="relative flex items-center justify-between gap-4 rounded-lg bg-indigo-600 px-4 py-3 text-white shadow-lg">
         <p className="text-sm font-medium">
           Fique por dentro de nossas novidades e promoções! Siganos nas redes
