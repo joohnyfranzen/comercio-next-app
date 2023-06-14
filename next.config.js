@@ -13,6 +13,8 @@ const nextConfig = {
     FIREBASE_APPID: process.env.FIREBASE_APPID,
     FIREBASE_MEASUREMENTID: process.env.FIREBASE_MEASUREMENTID,
     DATABASE_URL: process.env.DATABASE_URL,
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
   },
 };
 

@@ -11,7 +11,10 @@ class Login extends Handler {
       return res.status(400).json({ error: "Email e Senha são necessários" });
     } else {
       try {
-        if (email === "admin@admin.com" || password === "admin") {
+        if (
+          email === process.env.ADMIN_EMAIL ||
+          password === process.env.ADMIN_PASSWORD
+        ) {
           return res.status(200).json({ admin: true });
         }
         const user = await prisma.user.findFirst({ where: { email } });
