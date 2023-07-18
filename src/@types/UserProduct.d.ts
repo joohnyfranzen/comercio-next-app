@@ -3,8 +3,8 @@ import { User } from "./User";
 
 export type UserProduct = {
   id: string;
-  userId: number;
-  productId: number;
+  userId: string;
+  productId: string;
   user: User;
   product: Product;
 };

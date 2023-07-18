@@ -1,6 +1,7 @@
 import Handler from "@/back/handler";
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import user from "../user";
 
 class UserProduct extends Handler {
   async get(req: NextApiRequest, res: NextApiResponse) {
@@ -27,8 +28,8 @@ class UserProduct extends Handler {
     const { id } = req.query;
     const prisma = new PrismaClient();
     try {
-      const userProduct = await prisma.userProduct.delete({
-        where: { id: String(id) },
+      const userProduct = await prisma.userProduct.deleteMany({
+        where: { userId: String(id) },
       });
       return res.status(200).json({ userProduct });
     } catch (err) {
@@ -38,11 +39,13 @@ class UserProduct extends Handler {
   async put(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query;
     const prisma = new PrismaClient();
+    console.log(id);
     try {
-      const userProduct = await prisma.userProduct.update({
-        where: { id: String(id) },
+      const userProduct = await prisma.userProduct.updateMany({
+        where: { userId: String(id) },
         data: { deleted: true },
       });
+      console.log(userProduct);
       return res.status(200).json({ userProduct });
     } catch (err) {
       return res.status(400).json({ message: err });

@@ -1,4 +1,5 @@
 export type NewSell = {
+  id?: string;
   name?: string;
   email?: string;
   password?: string;

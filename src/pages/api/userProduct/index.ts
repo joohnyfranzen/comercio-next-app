@@ -8,12 +8,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 class UserProduct extends Handler {
   async post(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
-    const { name, email, password, phoneNumber, address, userProducts } =
+    const { id, name, email, password, phoneNumber, address, userProducts } =
       req.body;
+    console.log(id, name, email, password, phoneNumber, address, userProducts);
     var userId: String;
     try {
       const findUser = await prisma.user.findUnique({
-        where: { email },
+        where: { id },
       });
       if (!findUser) {
         const newUser = await prisma.user.create({
@@ -107,16 +108,11 @@ class UserProduct extends Handler {
   async get(req: NextApiRequest, res: NextApiResponse) {
     const prisma = new PrismaClient();
     try {
-      const userProduct = await prisma.user.findMany({
+      const userProduct = await prisma.userProduct.findMany({
+        where: { deleted: false },
         include: {
-          userProducts: {
-            include: {
-              product: true,
-            },
-            where: {
-              deleted: false,
-            },
-          },
+          user: true,
+          product: true,
         },
       });
       return res.status(200).json(userProduct);

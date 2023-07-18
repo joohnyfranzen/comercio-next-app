@@ -11,6 +11,7 @@ export default function NewSell() {
   const router = useRouter();
   const { setStatus, setMessage } = useAlertStore();
   const [newUser, setNewUser] = useState({
+    id: "",
     name: "",
     email: "",
     password: "",
@@ -47,6 +48,7 @@ export default function NewSell() {
       return selectedProduct;
     });
     const formData: NewSell = {
+      id: isNewUser == false ? selectedUser?.id : "",
       name: isNewUser == false ? selectedUser?.name : newUser.name,
       email: isNewUser == false ? selectedUser?.email : newUser.email,
       password: isNewUser == false ? selectedUser?.password : newUser.password,
