@@ -4,24 +4,19 @@ import { Bar } from "react-chartjs-2";
 import { todosOptions } from "../options";
 import { labels } from "../labels";
 
-export default function TabTodos({ data }: { data: Log }) {
+export default function TabUsadosSemana({ data }: { data: Log }) {
   const totalSold = {
     labels,
     datasets: [
       {
-        label: "Valor Total Vendido",
+        label: "Valor Por Semana Vendido",
         data: [
-          data.totalPrice,
-          data.totalPriceSixMonthsAgo,
-          data.totalPriceThreeMonthsAgo,
-          data.totalPriceTwoMonthsAgo,
-          data.totalPriceOneMonthAgo,
-          data.totalPriceThreeWeeksAgo,
-          data.totalPriceTwoWeeksAgo,
-          data.totalPriceOneWeekAgo,
-          data.totalPriceThreeDaysAgo,
-          data.totalPriceTwoDaysAgo,
-          data.totalPriceOneDayAgo,
+          data.totalPriceBetweenUsed6And5WeeksAgo,
+          data.totalPriceBetweenUsed5And4WeeksAgo,
+          data.totalPriceBetweenUsed4And3WeeksAgo,
+          data.totalPriceBetweenUsed3And2WeeksAgo,
+          data.totalPriceBetweenUsed2And1WeeksAgo,
+          data.totalPriceBetweenUsed1And0WeeksAgo,
         ],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
@@ -31,19 +26,14 @@ export default function TabTodos({ data }: { data: Log }) {
     labels,
     datasets: [
       {
-        label: "Quantidade Total Vendida",
+        label: "Quantidade Por Semana Vendida",
         data: [
-          data.totalQuantity,
-          data.totalQuantitySixMonthsAgo,
-          data.totalQuantityThreeMonthsAgo,
-          data.totalQuantityTwoMonthsAgo,
-          data.totalQuantityOneMonthAgo,
-          data.totalQuantityThreeWeeksAgo,
-          data.totalQuantityTwoWeeksAgo,
-          data.totalQuantityOneWeekAgo,
-          data.totalQuantityThreeDaysAgo,
-          data.totalQuantityTwoDaysAgo,
-          data.totalQuantityOneDayAgo,
+          data.totalQuantityBetweenUsed6And5WeeksAgo,
+          data.totalQuantityBetweenUsed5And4WeeksAgo,
+          data.totalQuantityBetweenUsed4And3WeeksAgo,
+          data.totalQuantityBetweenUsed3And2WeeksAgo,
+          data.totalQuantityBetweenUsed2And1WeeksAgo,
+          data.totalQuantityBetweenUsed1And0WeeksAgo,
         ],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

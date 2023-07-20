@@ -1,8 +1,8 @@
 import { Log } from "@/@types/Log";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { Bar } from "react-chartjs-2";
-import { todosOptions } from "../options";
-import { labels } from "../labels";
+import { todosOptions } from "../../options";
+import { labels } from "../../labels";
 
 export default function TabUsados({ data }: { data: Log }) {
   const totalSold = {

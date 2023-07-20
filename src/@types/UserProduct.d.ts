@@ -5,6 +5,8 @@ export type UserProduct = {
   id: string;
   userId: string;
   productId: string;
-  user: User;
+  user?: User;
   product: Product;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 };

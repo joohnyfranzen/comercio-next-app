@@ -11,10 +11,19 @@ import { Bar } from "react-chartjs-2";
 import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import TabTodos from "./TabTodos";
 import { Log } from "@/@types/Log";
-import TabNovos from "./TabNovos";
-import TabUsados from "./TabUsados";
+import TabNovos from "./Tudo/TabNovos";
+import TabTodos from "./Tudo/TabTodos";
+import TabUsados from "./Tudo/TabUsados";
+import TabTodosMes from "./Meses/TabTodos";
+import TabNovosMes from "./Meses/TabNovos";
+import TabUsadosMes from "./Meses/TabUsados";
+import TabTodosSemana from "./Semanas/TabTodos";
+import TabNovosSemana from "./Semanas/TabNovos";
+import TabUsadosSemana from "./Semanas/TabUsados";
+import TabTodosDia from "./Dias/TabTodos";
+import TabNovosDia from "./Dias/TabNovos";
+import TabUsadosDia from "./Dias/TabUsados";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -100,19 +109,91 @@ export default function SellsLog() {
     <div>
       <Tabs isFitted>
         <TabList mb="1em">
-          <Tab>Todos</Tab>
-          <Tab>Novos</Tab>
-          <Tab>Usados</Tab>
+          <Tab>Tudo</Tab>
+          <Tab>Meses</Tab>
+          <Tab>Semanas</Tab>
+          <Tab>Dias</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <TabTodos data={data} />
+            <Tabs isFitted>
+              <TabList mb="1em">
+                <Tab>Todos</Tab>
+                <Tab>Novos</Tab>
+                <Tab>Usados</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <TabTodos data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabNovos data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabUsados data={data} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </TabPanel>
           <TabPanel>
-            <TabNovos data={data} />
+            <Tabs isFitted>
+              <TabList mb="1em">
+                <Tab>Todos</Tab>
+                <Tab>Novos</Tab>
+                <Tab>Usados</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <TabTodosMes data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabNovosMes data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabUsadosMes data={data} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </TabPanel>
           <TabPanel>
-            <TabUsados data={data} />
+            <Tabs isFitted>
+              <TabList mb="1em">
+                <Tab>Todos</Tab>
+                <Tab>Novos</Tab>
+                <Tab>Usados</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <TabTodosSemana data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabNovosSemana data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabUsadosSemana data={data} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </TabPanel>
+          <TabPanel>
+            <Tabs isFitted>
+              <TabList mb="1em">
+                <Tab>Todos</Tab>
+                <Tab>Novos</Tab>
+                <Tab>Usados</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <TabTodosDia data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabNovosDia data={data} />
+                </TabPanel>
+                <TabPanel>
+                  <TabUsadosDia data={data} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </TabPanel>
         </TabPanels>
       </Tabs>
