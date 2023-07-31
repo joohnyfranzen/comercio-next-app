@@ -5,7 +5,8 @@ import Layout from "@/components/AdminComponents/Layout";
 import { Button } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 
 export default function Vendas() {
   const [data, setData] = useState<UserProduct[]>([]);
@@ -66,7 +67,7 @@ export default function Vendas() {
               if (vendas.length === 1) {
                 return vendas.map((venda) => (
                   <tr key={venda.id}>
-                    <td>{venda.user.name}</td>
+                    <td>{venda.user?.name}</td>
                     <td className="px-5 py-3 border">
                       {venda.product.name}
                       <br />
@@ -84,25 +85,26 @@ export default function Vendas() {
                       </Link>
                     </td>
                     <td className="px-5 py-3 border">
-                      <EndOrder id={vendas[0].userId} />
+                      <EndOrder id={venda.userId} />
                     </td>
                     <td className="px-5 py-3 border">
-                      <DeleteOrder id={vendas[0].userId} />
+                      <DeleteOrder id={venda.userId} />
                     </td>
                   </tr>
                 ));
               } else {
                 return (
-                  <tr>
-                    <td>{vendas[0].user.name}</td>
+                  <tr key={vendas[0].userId}>
+                    <td>{vendas[0].user?.name}</td>
                     <td className="px-5 py-3 border">
                       {vendas.map((venda) => (
-                        <p>{venda.product.name}</p>
+                        <p key={venda.id}>{venda.product.name}</p>
                       ))}
                     </td>
                     <td className="px-5 py-3 border">
                       {vendas.map((venda, i) => (
                         <p
+                          key={venda.id}
                           className={i === vendas.length - 1 ? "underline" : ""}
                         >
                           {i > 0 ? "+" : ""}
