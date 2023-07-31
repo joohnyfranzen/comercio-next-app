@@ -33,8 +33,8 @@ export default function Home() {
         return product.createdAt;
       });
       const sortedProducts = createdAtProduct.sort(function (a, b) {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
+        const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0); // Definindo data padrão caso createdAt seja nulo
+        const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0); // Definindo data padrão caso createdAt seja nulo
 
         if (dateA < dateB) {
           return 1;
