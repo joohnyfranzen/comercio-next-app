@@ -72,7 +72,6 @@ export default function NewSell() {
         setStatus("error");
         setMessage(`Erro ao finalizar venda. ${error}.`);
         console.log(error);
-        router.reload();
       });
   };
   const addProduct = () => {
