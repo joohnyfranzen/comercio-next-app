@@ -71,6 +71,7 @@ export default function NewSell() {
       .catch((error) => {
         setStatus("error");
         setMessage(`Erro ao finalizar venda. ${error}.`);
+        console.log(error);
         router.reload();
       });
   };
