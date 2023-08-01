@@ -6,18 +6,21 @@ import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 class UserProduct extends Handler {
+  private static prisma = new PrismaClient();
   async post(req: NextApiRequest, res: NextApiResponse) {
-    const prisma = new PrismaClient();
     const { id, name, email, password, phoneNumber, address, userProducts } =
       req.body;
     console.log(id, name, email, password, phoneNumber, address, userProducts);
-    var userId: String;
+
     try {
-      const findUser = await prisma.user.findUnique({
+      let userId: string;
+
+      const findUser = await UserProduct.prisma.user.findUnique({
         where: { id },
       });
+
       if (!findUser) {
-        const newUser = await prisma.user.create({
+        const newUser = await UserProduct.prisma.user.create({
           data: {
             name,
             email,
@@ -38,7 +41,8 @@ class UserProduct extends Handler {
       } else {
         userId = findUser.id;
       }
-      const userProduct = await prisma.userProduct.createMany({
+
+      const userProduct = await UserProduct.prisma.userProduct.createMany({
         data: userProducts.map((userProduct: ProductUser) => {
           return {
             userId: userId,
@@ -46,8 +50,9 @@ class UserProduct extends Handler {
           };
         }),
       });
-      // Products that don´t have inventory need to be soft deleted after selling
-      const softDeleteProducts = await prisma.product.updateMany({
+
+      // Products that don't have inventory need to be soft deleted after selling
+      const softDeleteProducts = await UserProduct.prisma.product.updateMany({
         where: {
           id: {
             in: userProducts.map((product: Product) => product.id),
@@ -60,7 +65,7 @@ class UserProduct extends Handler {
       });
 
       // Products that have inventory need to be updated
-      const productsWithInventory = await prisma.product.findMany({
+      const productsWithInventory = await UserProduct.prisma.product.findMany({
         where: {
           id: {
             in: userProducts.map((product: Product) => product.id),
@@ -76,7 +81,7 @@ class UserProduct extends Handler {
         (product) => product.inventory?.stock ?? 0 > 0
       );
 
-      const updateInventory = await prisma.inventory.updateMany({
+      const updateInventory = await UserProduct.prisma.inventory.updateMany({
         where: {
           productId: {
             in: productsWithInventoryAndStock.map((product) => product.id),
@@ -89,32 +94,35 @@ class UserProduct extends Handler {
         },
       });
 
-      const productsWithZeroStock = await prisma.product.updateMany({
-        where: {
-          inventory: {
-            stock: {
-              equals: 0,
+      const productsWithZeroStock = await UserProduct.prisma.product.updateMany(
+        {
+          where: {
+            inventory: {
+              stock: {
+                equals: 0,
+              },
             },
           },
-        },
-        data: { deleted: true },
-      });
+          data: { deleted: true },
+        }
+      );
 
       return res.status(200).json({ userProduct });
     } catch (err) {
       return res.status(400).json({ message: err });
     }
   }
+
   async get(req: NextApiRequest, res: NextApiResponse) {
-    const prisma = new PrismaClient();
     try {
-      const userProduct = await prisma.userProduct.findMany({
+      const userProduct = await UserProduct.prisma.userProduct.findMany({
         where: { deleted: false },
         include: {
           user: true,
           product: true,
         },
       });
+
       return res.status(200).json(userProduct);
     } catch (err) {
       return res.status(400).json({ message: err });
